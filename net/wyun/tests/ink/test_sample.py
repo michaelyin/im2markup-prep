@@ -17,6 +17,10 @@ class TestSample(TestCase):
         self.stroke2 = self.idd.traces[2]
         prev = self.idd.traces[1]
 
+    def test_inkml_loading(self):
+        print 'loading inkml'
+        print 'latex: ', self.idd.latex
+
 
     def test_get_bounding_box_h1000(self):
         self.assertEqual((0, 0, 69622, 10000), (self.idd.ox, self.idd.oy, self.idd.os, self.idd.ot))
