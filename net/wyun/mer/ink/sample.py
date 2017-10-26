@@ -144,7 +144,7 @@ class Sample(object):
         image = np.zeros((max_x + 1, max_y + 1))
         for i in range(all_coords.shape[1]):
             image[all_coords[0, i], all_coords[1, i]] = 255
-        misc.imsave('temp/all.png', image.T)
+        #misc.imsave('temp/all.png', image.T)
         return image
 
     def draw_trace_map(self):
@@ -169,7 +169,7 @@ class Sample(object):
                 trace.normed_connected_coords[0, :] - min_x, trace.normed_connected_coords[1, :] - min_y] = trace.id
             trace.normed_connected_coords[0, :] -= min_x
             trace.normed_connected_coords[1, :] -= min_y
-        misc.imsave('temp/map.png', trace_map.T)
+        #misc.imsave('temp/map.png', trace_map.T)
         return trace_map
 
     def loading_traces(self, root, debug=False):
@@ -179,6 +179,11 @@ class Sample(object):
         """
         traces = dict()
         for child in root:
+            tag = child.tag
+            attrib = child.attrib
+            #print child.tag, child.attrib
+            if tag.endswith('annotation') and attrib and attrib['type'] == 'truth':
+                self.latex = child.text
             if child.tag[-5:] == 'trace':
                 trace_id = child.attrib['id']
                 coords = child.text
