@@ -110,6 +110,11 @@ models/tensorflow/*.ckpt.*
 data/batch/pickle/*.iltlist
 data/batch/pickle/*.inklist
 data/batch/images/*.png
+data/batch/formula_images
 data/batch/inkml/*
 data/batch/lk/*
 temp/
+
+#im2markup-prep
+data/batch.tar.gz
+data/xlsx/*
