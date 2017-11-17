@@ -45,6 +45,10 @@ class Sample(object):
         if debug:
             print(self.norm_w, self.norm_h)
 
+    def re_calculate_IMG_MINMAX(self):
+        (self.ox, self.oy, self.os, self.ot) = get_bounding_box_h1000(self.traces)
+        (self.IMGxMIN, self.IMGyMIN, self.IMGxMAX, self.IMGyMAX) = (self.ox, self.oy, self.os, self.ot)
+
     def nStrokes(self):
         return len(self.traces)
 
@@ -183,7 +187,7 @@ class Sample(object):
             attrib = child.attrib
             #print child.tag, child.attrib
             if tag.endswith('annotation') and attrib and attrib['type'] == 'truth':
-                self.latex = child.text
+                self.latex = child.text.strip()
             if child.tag[-5:] == 'trace':
                 trace_id = child.attrib['id']
                 coords = child.text
@@ -536,7 +540,7 @@ class Sample(object):
 
         R = float(W*1.0/H)
         #//Keeping the aspect ratio (R), scale to 256 pixels height
-        H = 256
+        H = 80 #256
         W = int(H * R)
         if W <= 0: W = 1
 
