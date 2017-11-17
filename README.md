@@ -4,6 +4,8 @@ an python start project for demostrating unittest, logging, and package
 
 #unit testing:  
 python -m unittest discover -v
+or
+python -m unittest net.wyun.tests.prep.test_batch.TestBatch.test_al
 
 logging configuration file:  
 logging.conf
