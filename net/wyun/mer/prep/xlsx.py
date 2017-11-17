@@ -1,17 +1,19 @@
 #from openpyxl import load_workbook
 from openpyxl import load_workbook
+import xlrd
 
 class Excel(object):
 
     def __init__(self, file_path = 'data/scg/test.xlsx'):
         # Load in the workbook
-        wb = load_workbook(file_path)
+        wb = xlrd.open_workbook(file_path, on_demand = True)
 
         # Get sheet names
-        print(wb.get_sheet_names())  # [u'hw_record', u'Sheet1']
+        #print(wb.get_sheet_names())  # [u'hw_record', u'Sheet1']
 
         # Get a sheet by name
-        self.worksheet = wb.get_sheet_by_name('hw_record')
+        #self.worksheet = wb.get_sheet_by_name('hw_record')
+        self.worksheet = wb.sheet_by_index(0)
 
     def get_scg_record(self, index):
         '''
@@ -19,11 +21,13 @@ class Excel(object):
         :param index: row index in the excel sheet
         :return: (id, scg, scg_truth)
         '''
-        if index < 2 or index > self.get_row_number():
+        if index < 1 or index > self.get_row_number():
+            print 'index: ', index
             raise ValueError(" index is out of range !!!")
-        (idx1, idx2, idx3) = ('A' + str(index), 'B' + str(index), 'C' + str(index))
-        return self.worksheet[idx1].value, self.worksheet[idx2].value, self.worksheet[idx3].value
+        row = index
+
+        return int(self.worksheet.cell_value(row, 0)), self.worksheet.cell_value(row, 1), self.worksheet.cell_value(row, 2)
 
     def get_row_number(self):
-        return len(self.worksheet['A'])
+        return self.worksheet.nrows
 
