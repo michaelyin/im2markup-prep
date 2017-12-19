@@ -18,7 +18,7 @@ class TestScgImage(TestCase):
 
 
     def test_scg_file(self):
-        scgink  = json.load(open('data/exp.json'))
+        scgink  = json.load(open('data/x_+_y_square.json'))
         print '\n', scgink
         print '\n', scgink['scg_ink']
 
