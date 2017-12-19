@@ -3,11 +3,6 @@
 
 """Read and parse data from the lanking project."""
 
-import os
-import glob
-import json
-import re
-
 import logging
 import sys
 
