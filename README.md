@@ -1,11 +1,11 @@
-# zen
-an python start project for demostrating unittest, logging, and package
+# im2markup-prep
+util scripts to prepare data for im2markup project
 
 
 #unit testing:  
 python -m unittest discover -v
 or
-python -m unittest net.wyun.tests.prep.test_batch.TestBatch.test_al
+python -m unittest net.wyun.tests.prep.test_batch.TestBatch.test_all
 
 logging configuration file:  
 logging.conf
