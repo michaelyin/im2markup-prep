@@ -49,8 +49,9 @@ class Batch(object):
 
     def generate_scg_idlists(self):
         '''
+        handle xlsx files
         from a list of xlsx files, generate three scg list: train, validate, and test.
-        it store the id for scg files embedded in the excel files
+        it store the ids for scg files embedded in the excel files
         :return:
         '''
         ids = list(self.scgs.keys())
@@ -102,6 +103,10 @@ class Batch(object):
             pickle.dump(ids, fout)
 
     def load_all_scgs(self):
+        '''
+        From a list of .xlsx files, generate a dictionary of Scgs with key is the id of Scg
+        :return: scgs, dictionary of Scgs
+        '''
         scgs = {}  # dictionary of Scgs
         aspect_ratios = {}
         with codecs.open('data/invalid_scgs.txt', 'w', 'utf-8') as f_out:
