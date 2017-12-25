@@ -117,4 +117,4 @@ temp/
 
 #im2markup-prep
 data/batch.tar.gz
-data/xlsx/*
+data/xlsx/hw*
