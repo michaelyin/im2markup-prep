@@ -1,0 +1,9 @@
+1. new sql dump to hw_record table with processed flag set to false
+2. run python -m unittest net.wyun.tests.db.test_DBBatch.TestDBBatch.test_process_hw_record_table for generating images
+   for all scg records.
+3. if image format (size) changes, then you also need generate png images for inkml files.
+    python -m unittest net.wyun.tests.prep.test_batch.TestBatch.test_inkml2png
+4. run java application to generate equation table for formula verification.
+5. merge new records with those newly verified equation records from equation table.
+    dump table data only:  mysqldump -uroot -p --no-create-info equation > equation.sql
+6. generate im2markup files for training/validation.
