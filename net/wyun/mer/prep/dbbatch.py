@@ -5,11 +5,9 @@ import pickle
 import fnmatch
 import os
 import codecs
-from net.wyun.mer.ink.sample import Sample
-from os.path import basename
-from scipy import misc
-from xlsx import Excel
-from net.wyun.mer.ink.scg import Scg
+from net.wyun.mer.ink.scgimage import ScgImage
+import batch
+
 
 
 '''
@@ -37,13 +35,75 @@ class DBBatch(object):
         self.dbuser = os.path.realpath(dbuser)
         self.list_out_dir = list_out_dir
         self.db = MySQLdb.connect(dbhost, dbuser, dbpass, dbname, charset = 'utf8',use_unicode=True) #"hope", "equation")
-        self.sql = "SELECT id, create_t, image_name, latex, (verified=B'1') AS verified, file_name FROM equation"
+        self.equation_sql = "SELECT id, create_t, image_name, latex, (verified=B'1') AS verified, file_name FROM equation"
+        self.hw_record_sql = "SELECT id, scg_ink FROM hw_record"
         self.latex_index = 0
         self.equation_dict = dict()
 
     def __del__(self):
         print 'destruction here, close db.'
         self.db.close()
+
+    def insert_hw_record(self, hw_record):
+        '''
+        (id, scg_ink, response, processed, request_at, response_at)
+        :param hw_record:
+        :return:
+        '''
+        query = "INSERT INTO hw_record(id, scg_ink, response, processed, request_at, response_at) " \
+                "VALUES(%s,%s,%s, %s,%s, %s)"
+
+        try:
+            (id, scg_ink, response, processed, request_at, response_at) = hw_record
+            #requestDatetime = datetime.strptime(request_at, "%m/%d/%Y %H:%M:%S")
+            #responseDatetime = datetime.strptime(response_at, "%m/%d/%Y %H:%M:%S")
+            cursor = self.db.cursor()
+            cursor.execute(query, hw_record)
+
+            if cursor.lastrowid:
+                print('last insert id', cursor.lastrowid)
+            else:
+                print('last insert id not found')
+
+            self.db.commit()
+        except:
+            logging.exception("DB writting exception!!!")
+            raise
+
+        finally:
+            cursor.close()
+
+
+    def process_hw_record_table(self):
+        '''
+         generate png images from scg content
+        :return:
+        '''
+        cursor = self.db.cursor()
+
+
+        try:
+            cursor.execute(self.hw_record_sql)
+            # Fetch all the rows in a list of lists.
+            results = cursor.fetchall()
+            total = len(results)
+            print 'total hw_record records: ', total
+            count = 0
+            for row in results:
+                count += 1
+                print 'process ' + str(count) + ' of ' + str(total)
+                id, scg_content = row[0], row[1]
+
+                if count == 1537:
+                    print id, scg_content
+                    break
+
+                scg = ScgImage(scg_content, id)
+                scg.save_image(batch.png_dir + str(id) + '.png')
+
+        except:
+            logging.exception("DB reading exception!!!")
+            raise
 
     def generate_db_idlists(self):
         '''
@@ -60,7 +120,7 @@ class DBBatch(object):
         ids = []
 
         try:
-            cursor.execute(self.sql)
+            cursor.execute(self.equation_sql)
             # Fetch all the rows in a list of lists.
             results = cursor.fetchall()
             print 'total records: ', len(results)
@@ -171,7 +231,7 @@ class DBBatch(object):
         cursor = self.db.cursor()
 
         try:
-            cursor.execute(self.sql)
+            cursor.execute(self.equation_sql)
             # Fetch all the rows in a list of lists.
             results = cursor.fetchall()
             print 'total records: ', len(results)
