@@ -25,6 +25,8 @@ import logging
 logger= logging.getLogger("batch")
 logging.basicConfig(format='%(asctime)s - %(funcName)s - %(message)s', filename='temp/batch.log',level=logging.DEBUG)
 
+
+png_dir = 'data/batch/formula_images/'
 class Batch(object):
     def __init__(self, inkml_file_path, xlsx_file_path, list_out_dir='data/batch/pickle/'):
         '''
@@ -37,7 +39,7 @@ class Batch(object):
         self.list_out_dir = list_out_dir
         self.latex_index = 0
         self.latex_length_threshold = 6 # if length < 4, this inkml file is not included
-        self.scgs = self.load_all_scgs()
+        #self.scgs = self.load_all_scgs()
         self.id_blacklist = self.blacklist()
 
     def blacklist(self):
@@ -118,13 +120,13 @@ class Batch(object):
                     max_row = excel.get_row_number()
                     for idx in range(1, max_row):
                         print idx
-                        id, scg, truth = excel.get_scg_record(idx)
+                        id, scg, truth, req_at, resp_at = excel.get_scg_record(idx)
                         if len(truth.strip()) == 0:
                             print id
                             line = str(id) + ' ' + 'no latex\n'
                             f_out.write(line)
                             continue
-                        scgs[id] = Scg(id, scg, truth)
+                        scgs[id] = Scg(id, scg, truth, req_at, resp_at)
                         aspect_ratios[id] = scgs[id].w_h_ratio
         #dump aspect_ratios to a file
         ars = aspect_ratios.values()
@@ -134,6 +136,26 @@ class Batch(object):
             pickle.dump(aspect_ratios, fout)
         return scgs
 
+    def all_inkml_files(self):
+        '''
+
+        :return: files, files_nolatex
+        '''
+        files = []
+        files_nolatex = []
+        for root, dirnames, filenames in os.walk(self.inkml_file_path, followlinks=True):
+                for filename in fnmatch.filter(filenames, '*.inkml'):
+                    tmp_path = os.path.join(root, filename)
+                    print tmp_path
+                    sample = Sample(tmp_path)
+                    if hasattr(sample, 'latex') and self.check_latex_length(sample):  #latex has been stripped
+                        #print 'latex: ', tmp_path
+
+                        files.append(tmp_path)
+                    else:
+                        files_nolatex.append(tmp_path)
+        return files, files_nolatex
+
     def generate_filelists(self):
         '''
         retrieve all inkml files in self.inkml_file_path, check if it has latex truth information. if yes, add it to
@@ -141,20 +163,7 @@ class Batch(object):
         is in 80:10:10.
         :return:
         '''
-        files = []
-        files_nolatex = [] # it also includes those  length < 4
-        for root, dirnames, filenames in os.walk(self.inkml_file_path, followlinks=True):
-            for filename in fnmatch.filter(filenames, '*.xlsx'):
-                tmp_path = os.path.join(root, filename)
-                #print tmp_path
-                sample = Sample(tmp_path)
-                if hasattr(sample, 'latex') and self.check_latex_length(sample):  #latex has been stripped
-                    #print 'latex: ', tmp_path
-
-                    files.append(tmp_path)
-                else:
-                    files_nolatex.append(tmp_path)
-
+        files, files_nolatex = self.all_inkml_files()
 
         shuffle(files)
         print 'total files: ', len(files)
@@ -219,7 +228,6 @@ class Batch(object):
         with open(scg_id_list_file, 'rb') as fin:
             idlist = pickle.load(fin)
 
-        png_dir = 'data/batch/formula_images/'
         with codecs.open(outfile, 'w', 'utf-8') as f_out:
             for file_path in flist:
                 print 'file: ', file_path
@@ -256,6 +264,7 @@ class Batch(object):
         base = basename(file_path)
         return os.path.splitext(base)[0]
 
+    # This function is deprecated. Now all im2markup files would be generated based on database equation table
     def generate_im2markup_files(self):
         '''
         process train.flist, test.flist, and validate.flist
@@ -279,3 +288,22 @@ class Batch(object):
             pair_file_name = 'test'
             print 'generate ', pair_file_name, ' lst'
             self.process_list(pair_file_name, latex_out)
+
+    def inkml2png(self):
+        '''
+        for all inkml files in data/batch/inkml folder, generate its png image and save it
+        to data/batch/formula_images/ folder
+
+        It is used if different resolution images need to be generated for mhr performance evaluation.
+        :return:
+        '''
+        files, files_nolatex = self.all_inkml_files()
+        for file_path in files:
+            print 'file: ', file_path
+            # process one file
+            sample = Sample(file_path)
+            # get filename without extension
+            png_name = self.get_filename_noext(file_path)
+            # output image
+            img, W, H = sample.render()
+            misc.imsave(png_dir + png_name + '.png', img)
