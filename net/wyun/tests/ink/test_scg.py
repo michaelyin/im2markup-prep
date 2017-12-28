@@ -12,11 +12,11 @@ class TestScg(TestCase):
     def setUp(self):
         # Load in the workbook
         excel = Excel('data/scg/test.xlsx')
-        scg_id, scg_content, truth = excel.get_scg_record(1)
-        self.scg1 = Scg(scg_id, scg_content, truth)  # x + y
+        scg_id, scg_content, truth, req_at, resp_at = excel.get_scg_record(1)
+        self.scg1 = Scg(scg_id, scg_content, truth, req_at, resp_at)  # x + y
 
-        scg_id, scg_content, truth = excel.get_scg_record(2)
-        self.scg2 = Scg(scg_id, scg_content, truth)  # x + y
+        scg_id, scg_content, truth, req_at, resp_at = excel.get_scg_record(2)
+        self.scg2 = Scg(scg_id, scg_content, truth, req_at, resp_at)  # x + y
 
     def test_save_image1(self):
         self.scg1.save_image('temp/'  + str(self.scg1.id) + '.png')
@@ -33,3 +33,4 @@ class TestScg(TestCase):
         print latex
         aspect = self.scg2.w_h_ratio
         print 'aspect ratio: ', aspect
+        print 'request_at: ', self.scg2.request_at
