@@ -10,6 +10,13 @@ class TestDBBatch(TestCase):
     def test_generate_db_idlists(self):
         self.dbbatch.generate_db_idlists()
 
-
     def test_generate_im2markup_files(self):
         self.dbbatch.generate_im2markup_files()
+
+
+    def test_process_hw_record_table(self):
+        '''
+        generate png files for all hw_records
+        :return:
+        '''
+        self.dbbatch.process_hw_record_table()
