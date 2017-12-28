@@ -8,9 +8,12 @@ from scipy import misc
 
 class Scg(object):
 
-    def __init__(self, scg_id, scg_content, truth):
+    def __init__(self, scg_id, scg_content, truth, request_at, response_at):
         self.id = scg_id
         self.content = scg_content
+        self.response = truth
+        self.request_at = request_at
+        self.response_at = response_at
         self.truth_obj = Payload(truth)
         self.dummySample = Sample('data/inkml/65_alfonso.inkml')
         self.w_h_ratio = 1.0 # initialize here, updated in replace_traces()
