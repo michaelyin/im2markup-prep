@@ -11,6 +11,6 @@
 5. merge new records with those newly verified equation records from equation table.
     dump table data only:  mysqldump -uroot -p --no-create-info equation > equation.sql
 
-6. generate im2markup files for training/validation.
+6. generate im2markup files for training/validation. (seshat inkml, excel file are now all saved in DB)
     a. test_generate_db_idlists() to generate *.idlist files
     b. generate_im2markup_files() to generate training files
