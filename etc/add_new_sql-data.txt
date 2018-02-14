@@ -1,9 +1,16 @@
 1. new sql dump to hw_record table with processed flag set to false
+
 2. run python -m unittest net.wyun.tests.db.test_DBBatch.TestDBBatch.test_process_hw_record_table for generating images
-   for all scg records.
-3. if image format (size) changes, then you also need generate png images for inkml files.
+   for all scg records. (about 10 minutes for 100k records on my workstation)
+
+3. if image format (size) changes, then you also need generate png images for inkml files. (about 400 seconds)
     python -m unittest net.wyun.tests.prep.test_batch.TestBatch.test_inkml2png
+
 4. run java application to generate equation table for formula verification.
+
 5. merge new records with those newly verified equation records from equation table.
     dump table data only:  mysqldump -uroot -p --no-create-info equation > equation.sql
+
 6. generate im2markup files for training/validation.
+    a. test_generate_db_idlists() to generate *.idlist files
+    b. generate_im2markup_files() to generate training files
