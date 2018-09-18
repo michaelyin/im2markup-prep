@@ -49,7 +49,7 @@ class ScgImage(object):
 
         self.w_h_ratio = float(x_max - x_min) / (y_max - y_min)
         # Renormalize to height [0,10000] keeping the aspect ratio
-        H = 10000.0
+        H = 100.0
         W = H * (x_max - x_min) / (y_max - y_min)
         for trace_key, trace_v in traces.iteritems():
             trace_v.calc_coords_h10000(H, W, x_min, y_min, x_max, y_max)
