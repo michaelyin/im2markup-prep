@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='Scg Ink lib',
-    version='0.1.0',
+    version='0.1.1',
     author='Michael Yin',
     author_email='gt8442b@yahoo.com',
     packages=['net', 'net.wyun','net.wyun.mer', 'net.wyun.mer.ink'],
