@@ -1,6 +1,9 @@
 # im2markup-prep
 util scripts to prepare data for im2markup project
 
+# build scg ink lib
+python setup.py bdist --format=gztar
+
 
 #unit testing:  
 python -m unittest discover -v
