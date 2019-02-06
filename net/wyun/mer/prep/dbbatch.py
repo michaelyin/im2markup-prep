@@ -242,7 +242,7 @@ class DBBatch(object):
                 id = row[0]
                 if row[4] == 0:
                     print "id=%d,create_t=%s,latex=%s,verified=%d,file_name=%s" % \
-                          (row[0], row[1], row[2], row[3], row[4], row[5])
+                          (row[0], row[1], row[3], row[4], row[5])
                 else:
                     self.equation_dict[id] = equation_row
         except:
