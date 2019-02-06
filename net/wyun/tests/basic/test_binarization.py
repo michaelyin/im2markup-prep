@@ -25,6 +25,7 @@ th2 = th2.astype(np.uint8)
 print th2.shape, th2.dtype
 
 cv.imwrite('data/ocr-bin.jpg', th2, [int(cv.IMWRITE_JPEG_QUALITY), 20])
+cv.imwrite('data/ocr-bin.png', th2, [int(cv.IMWRITE_PNG_COMPRESSION), 80])
 misc.imsave('data/misc-bin.jpg', th2)
 print th2.shape, th2.dtype
 
