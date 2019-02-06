@@ -1,0 +1,81 @@
+<ns0:ink xmlns:ns0="http://www.w3.org/2003/InkML" xmlns:ns1="http://www.w3.org/1998/Math/MathML">
+<ns0:annotation type="Author">&#26446;&#26202;&#31179;</ns0:annotation>
+<ns0:annotation type="Reviewer">MXF</ns0:annotation>
+<ns0:annotationXML encoding="Content-MathML" type="truth">
+<ns1:math><ns1:mo xml:id="d_0colon">-</ns1:mo><ns1:mn xml:id="d_1colon">1</ns1:mn><ns1:mo xml:id="d_2colon3colon">&#8804;</ns1:mo><ns1:mi xml:id="d_4colon">a</ns1:mi><ns1:mo xml:id="d_5colon6colon">&#8804;</ns1:mo><ns1:mn xml:id="d_7colon">1</ns1:mn></ns1:math>
+</ns0:annotationXML>
+
+<ns0:trace id="0">
+21 168, 27 168, 31 167, 38 166, 40 166, 43 166, 45 166, 46 166
+</ns0:trace>
+
+<ns0:trace id="1">
+64 143, 64 146, 64 151, 63 156, 62 169, 61 174, 61 178, 60 183, 60 188, 60 190, 60 191
+</ns0:trace>
+
+<ns0:trace id="2">
+103 144, 96 150, 94 152, 91 155, 88 157, 86 159, 85 161, 84 162, 83 163, 85 165, 87 167, 91 169, 95 171, 99 172, 102 173, 105 173, 108 173, 109 173
+</ns0:trace>
+
+<ns0:trace id="3">
+80 184, 86 185, 88 185, 91 187, 95 188, 98 188, 99 189, 100 189, 101 190, 102 190, 102 190, 103 191, 104 190
+</ns0:trace>
+
+<ns0:trace id="4">
+152 155, 150 153, 149 150, 147 148, 144 145, 142 144, 141 143, 139 143, 136 145, 133 147, 131 150, 129 155, 126 165, 125 169, 124 175, 124 179, 124 182, 125 184, 126 186, 127 186, 130 184, 131 183, 135 179, 139 174, 143 169, 146 165, 148 163, 150 161, 152 159, 152 159, 152 161, 151 165, 151 168, 151 172, 152 178, 152 179, 153 181, 154 183, 156 184, 158 185, 159 186, 161 186, 161 186
+</ns0:trace>
+
+<ns0:trace id="5">
+196 148, 190 150, 184 152, 180 155, 176 157, 174 158, 172 159, 171 159, 174 161, 179 164, 183 166, 188 168, 192 169, 195 170, 199 171, 199 171, 200 171
+</ns0:trace>
+
+<ns0:trace id="6">
+169 180, 174 181, 178 183, 182 184, 191 188, 195 189, 198 190, 200 191, 202 191, 202 191
+</ns0:trace>
+
+<ns0:trace id="7">
+232 137, 231 140, 228 151, 227 158, 226 163, 225 170, 224 178, 223 187, 223 192, 222 198, 221 203, 221 205, 221 206
+</ns0:trace>
+
+<ns0:traceGroup xml:id="-- Segmentation Data --">
+    <ns0:annotation type="truth">Segmentation</ns0:annotation>
+
+    <ns0:traceGroup xml:id="0:">
+        <ns0:annotation type="truth">-</ns0:annotation>
+        <ns0:traceView traceDataRef="0" />
+        <ns0:annotationXML href="0:" />
+    </ns0:traceGroup>
+
+    <ns0:traceGroup xml:id="1:">
+        <ns0:annotation type="truth">1</ns0:annotation>
+        <ns0:traceView traceDataRef="1" />
+        <ns0:annotationXML href="1:" />
+    </ns0:traceGroup>
+
+    <ns0:traceGroup xml:id="2:3:">
+        <ns0:annotation type="truth">&#8804;</ns0:annotation>
+        <ns0:traceView traceDataRef="2" />
+        <ns0:traceView traceDataRef="3" />
+        <ns0:annotationXML href="2:3:" />
+    </ns0:traceGroup>
+
+    <ns0:traceGroup xml:id="4:">
+        <ns0:annotation type="truth">a</ns0:annotation>
+        <ns0:traceView traceDataRef="4" />
+        <ns0:annotationXML href="4:" />
+    </ns0:traceGroup>
+
+    <ns0:traceGroup xml:id="5:6:">
+        <ns0:annotation type="truth">&#8804;</ns0:annotation>
+        <ns0:traceView traceDataRef="5" />
+        <ns0:traceView traceDataRef="6" />
+        <ns0:annotationXML href="5:6:" />
+    </ns0:traceGroup>
+
+    <ns0:traceGroup xml:id="7:">
+        <ns0:annotation type="truth">1</ns0:annotation>
+        <ns0:traceView traceDataRef="7" />
+        <ns0:annotationXML href="7:" />
+    </ns0:traceGroup>
+</ns0:traceGroup>
+<annotation type="truth">-1\le a\le 1</annotation></ns0:ink>

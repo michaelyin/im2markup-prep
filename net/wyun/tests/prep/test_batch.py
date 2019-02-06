@@ -10,6 +10,7 @@ class TestBatch(TestCase):
         self.batch = Batch(inkml_path, id_path)
 
     # inkml file lists: train.flist, validate.flist, and test.flist in data/batch/pickle
+    # total 13960 files, takes about 90 sec. to run
     def test_generate_lists(self):
         # inkml_path = '/home/michael/temp/math_hwreco/data/batch/inkml/cuda2z'
         self.batch.generate_filelists()
@@ -29,3 +30,11 @@ class TestBatch(TestCase):
 
     def test_generate_scg_idlists(self):
         self.batch.generate_scg_idlists()
+
+    def test_inkml2png(self):
+        '''
+        This test would generate png files for all valid inkml training files
+        total 13960 files, about 390 sec.
+        :return:
+        '''
+        self.batch.inkml2png()

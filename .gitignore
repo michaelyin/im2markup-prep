@@ -3,6 +3,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*/*.pyc
+.DS_Store
+.idea
+
 
 # C extensions
 *.so
@@ -118,3 +123,24 @@ temp/
 #im2markup-prep
 data/batch.tar.gz
 data/xlsx/hw*
+
+#others
+aspectratio.dict
+data/batch/batch.tar.gz
+data/batch/formula_images_bk_Feb16/
+data/batch/im2latex_formulas.lst
+data/batch/im2latex_test.lst
+data/batch/im2latex_train.lst
+data/batch/im2latex_validate.lst
+data/batch/lst.tar.gz
+data/batch/pickle/
+data/invalid_scgs.txt
+data/misc-bin.jpg
+data/ocr-bin.jpg
+data/ocr-bin.png
+data/ocr_search/batch_20180920130856.txt
+data/ocr_search/batch_20180920195137.txt
+data/ocr_search/batch_20180921122406_newmachine_8concurrent.txt
+data/ocr_search/batch_20180923210140.txt
+data/ocr_search/batch_20180924070030.txt
+data/scgs_wo_latex.txt
