@@ -13,6 +13,6 @@ setup(
     long_description=open('README.md').read(),
     install_requires=[
         "numpy >= 1.13.3",
-        "scipy == 1.0.0",
+        "scipy == 1.10.0",
     ],
 )
